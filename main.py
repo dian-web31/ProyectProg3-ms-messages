@@ -128,5 +128,21 @@ def ValidationUser():
         print(f'Failed to send email')
         return jsonify({'error': 'Failed to send email'})
 
+@app.route("/reset-password", methods=['PUT'])
+def NewPassword():
+    data = request.json
+    email = data.get('email')
+    password = data.get('password')
+    subject = ("Nueva Contraseña")
+
+    success = send_email(subject, email, password)
+
+    if success:
+        print('Email sent successfully')
+        return jsonify({'message': 'Email sent successfully'})
+    else:
+        print(f'Failed to send email')
+        return jsonify({'error': 'Failed to send email'})
+
 if __name__ == '__main__':
     app.run(debug=True)
