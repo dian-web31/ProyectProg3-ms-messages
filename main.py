@@ -38,6 +38,7 @@ def send_email(subject, recipient_email, body_html):
     except Exception as e:
         return False, str(e)
 
+#TEST DE MENSAJERIA
 @app.route('/send-email', methods=['POST'])
 def send_email_endpoint():
     data = request.json
@@ -62,10 +63,8 @@ def Send_welcom():
     recipient = data.get('recipient')
     username = data.get('username')
 
-
     body_html = f"<p>Hola {username} bienvenido a nuestra pagina<p>"
     subject = "Bienvenido a Nuestro Servicio"
-
 
     success = send_email(subject, recipient, body_html)
     print(f'Success: {success}')
@@ -117,8 +116,8 @@ def Send_update():
 def ValidationUser():
     data = request.json
     email = data.get('email')
-    code = data.get('code')
-    subject = ("Su codigo de validacion es")
+    code = data.get('code2FA')
+    subject = ("Codigo de validacion")
 
     success = send_email(subject, email, code)
 
@@ -128,7 +127,6 @@ def ValidationUser():
     else:
         print(f'Failed to send email')
         return jsonify({'error': 'Failed to send email'})
-
 
 if __name__ == '__main__':
     app.run(debug=True)
