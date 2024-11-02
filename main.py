@@ -116,8 +116,8 @@ def Send_update():
 def ValidationUser():
     data = request.json
     email = data.get('email')
-    code = data.get('code2FA')
-    subject = ("Codigo de validacion")
+    code = (data.get('code2FA'))
+    subject = ("Codigo de segundo factor de autenticacion")
 
     success = send_email(subject, email, code)
 
